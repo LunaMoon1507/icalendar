@@ -101,8 +101,6 @@ dev = [
   {include-group = "docs"},
   {include-group = "formatting"},
   "towncrier>=25.8.0",
-  "tox",
-  "tox-uv",
   "zizmor==1.29.0", # also update .github/workflows/zizmor.yml
 ]
 
@@ -114,6 +112,14 @@ test = [
     "pytz>=2025.2",
     "types-python-dateutil",
     "types-pytz",
+]
+
+test-no-pytz = [
+    "coverage",
+    "hypothesis",
+    "mypy>=1.0",
+    "pytest",
+    "types-python-dateutil",
 ]
 
 formatting = [

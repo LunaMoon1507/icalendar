@@ -34,7 +34,7 @@ To install icalendar for development—including all of its dependencies for tes
 With all :ref:`prerequisites <development-prerequisites>` installed, you can run tests, reformat code, make various documentation builds, perform quality checks, and clean your environment.
 All :program:`Make` commands use the file :file:`Makefile` at the root of the repository.
 
-The :program:`Make` commands may invoke :program:`uv`, :program:`tox`, :program:`Sphinx`, :program:`Vale`, shell commands, and other programs.
+The :program:`Make` commands may invoke :program:`uv`, :program:`Sphinx`, :program:`Vale`, shell commands, and other programs.
 
 
 pre-commit
@@ -100,23 +100,26 @@ The screenshot below shows how to configure PyCharm to disable pre-commit by sea
 Run tests
 ---------
 
-Through :program:`uv`, :program:`tox` manages all test environments across all Python versions.
+To run the tests in the local development environment, run the following command.
 
-To run all tests in all environments, run the following command.
-
-..  code-block:: shell
+.. code-block:: shell
 
     make test
 
-The following command shows how to run tests in Python 3.14.
+This is equivalent to:
 
-..  code-block:: shell
+.. code-block:: shell
 
-    make test TOX_ENV=py314
+    uv run pytest
 
-.. seealso::
+Continuous integration runs the tests across all supported Python versions, including PyPy.
+It also runs a Python 3.10 job without the optional :mod:`pytz` dependency.
 
-    tox's `CLI interface documentation <https://tox.wiki/en/stable/reference/cli.html>`_.
+To run the tests with a specific Python version locally, use :program:`uv`:
+
+.. code-block:: shell
+
+    uv run --python 3.14 pytest
 
 
 Format code
@@ -224,30 +227,18 @@ The following example demonstrates subtyping through the usage of a protocol and
     - :ref:`annotating-callables`
 
 
-Activate a tox environment
---------------------------
+Use a different Python environment
+----------------------------------
 
-If you'd like to activate a specific tox virtual environment, use the following command, replacing the Python version accordingly.
-
-.. code-block:: shell
-
-    source .tox/py312/bin/activate
-
-
-Install icalendar manually
---------------------------
-
-The best way to test the package is to use tox as described above.
-
-However, if you can't install tox, or you'd like to use your local copy of icalendar in another Python environment, this section describes how to use your installed version of Python and pip.
+If you'd like to use your local copy of icalendar with another Python installation,
+use :program:`uv` to create or select the environment and run the tests:
 
 .. code-block:: shell
 
-    cd src/icalendar
-    python -m pip install -e .
+    uv run --python 3.12 pytest
 
-The above commands install icalendar and its dependencies in your Python environment so that you can access local changes.
-If tox fails to install icalendar during its first run, you can activate the environment in the :file:`.tox` folder and manually set up icalendar as shown above.
+The command installs icalendar and its development dependencies in a uv-managed environment,
+so local changes are available to the test process.
 
 To verify installation, launch a Python interpreter, and issue the following statements.
 

@@ -132,6 +132,7 @@ def test_all_cases_are_always_included(running_names, skipped_names, matrix):
         "python_version",
         "skip",
         "test_command",
+        "dependency_group",
     ],
 )
 def test_parameters_are_present(matrix, attribute):
