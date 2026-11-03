@@ -66,7 +66,7 @@ Then, you can run the tests and see that the error is reproduced.
 
 .. code-block:: console
 
-    tox -e py313 -- src/icalendar/tests/fuzzed/
+    uv run --python 3.13 pytest src/icalendar/tests/fuzzed/
 
 Ignore valid errors.
 Fix invalid errors.
@@ -104,7 +104,7 @@ Next, run the tests.
 
 .. code-block:: shell
 
-    $ tox -e py313 -- src/icalendar/tests/fuzzed/
+    $ uv run --python 3.13 pytest src/icalendar/tests/fuzzed/
 
 The output shows that the error is reproduced.
 

@@ -31,7 +31,10 @@ PYTHON_MINOR_VERSION_MIN = 10
 # Update this when a new Python minor version is released
 PYTHON_MINOR_VERSION_MAX = 14
 
-COMMAND_TEST = "uv run tox -e py"
+COMMAND_TEST = (
+    "uv run --no-sync coverage run --branch --source=src/icalendar "
+    "--omit=*/tests/hypothesis/* --omit=*/tests/fuzzed/* --module pytest"
+)
 
 
 def generate_matrix(git_ref, review, event_name=""):
@@ -101,7 +104,7 @@ def generate_matrix(git_ref, review, event_name=""):
     # RULE: use lowest allowed version for nopytz
     matrix.append(
         {
-            "test_command": "uv run tox -e nopytz",
+            "dependency_group": "test-no-pytz",
             "test_name": f"3.{PYTHON_MINOR_VERSION_MIN} (nopytz)",
             "python_version": f"3.{PYTHON_MINOR_VERSION_MIN}",
             "skip": run_no_jobs,
@@ -150,6 +153,7 @@ def generate_matrix(git_ref, review, event_name=""):
     for run in matrix:
         run.setdefault("test_name", run["python_version"])
         run.setdefault("test_command", COMMAND_TEST)
+        run.setdefault("dependency_group", "test")
 
     include = list(matrix)
     skipped = [run["test_name"] for run in matrix if run["skip"]]

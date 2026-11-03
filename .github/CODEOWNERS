@@ -31,7 +31,6 @@
 /bootstrap.py @niccokunzmann @stevepiercy
 /buildout.cfg @niccokunzmann @stevepiercy
 /pyproject.toml @niccokunzmann @stevepiercy
-/tox.ini @niccokunzmann @stevepiercy
 
 # Security
 /SECURITY.md @niccokunzmann @stevepiercy @angatha

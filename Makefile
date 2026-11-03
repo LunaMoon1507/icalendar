@@ -146,8 +146,8 @@ docstring: .venv  ## Test docstrings are formatted properly
 docs-all: .venv clean vale doctest docstring html linkcheckbroken  ## Clean docs build, then run vale, doctest, html, and linkcheckbroken
 
 .PHONY: test
-test: .venv  ## Run code tests and coverage
-	@uv run tox
+test: .venv  ## Run code tests
+	@uv run pytest
 
 .PHONY: test-dist
 test-dist:  ## Build and test the distribution files

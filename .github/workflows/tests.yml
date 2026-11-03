@@ -58,11 +58,17 @@ jobs:
     - name: Install dependencies
       if: ${{ !matrix.skip }}
       run: |
-        make dev PYTHONVERSION=${{ matrix.python_version }}
+        uv sync --no-dev --group ${{ matrix.dependency_group }}
         uv tree
     - name: Test
       if: ${{ !matrix.skip }}
       run: ${{ matrix.test_command }}
+    - name: Report coverage
+      if: ${{ !matrix.skip }}
+      run: |
+        uv run --no-sync coverage report
+        uv run --no-sync coverage html
+        uv run --no-sync coverage xml
     - name: Coveralls Parallel
       if: ${{ !matrix.skip }}
       uses: coverallsapp/github-action@8d6379e14d29928660c4ba802d8e85393440b329 # v2

@@ -3,7 +3,6 @@ __pycache__
 /.coverage
 /.hypothesis/
 /.prompts/
-/.tox/
 /.venv/
 /build/
 /coverage.xml

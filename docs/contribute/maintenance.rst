@@ -391,10 +391,8 @@ When adding support for a new Python version, or removing support for an old one
     Upgrade Python versions.
 :file:`.github/workflows/*.py`
     Add or remove the Python version from the test matrix.
-:file:`tox.ini`
-    Update the ``envlist`` to include or remove the Python version.
 :file:`pyproject.toml`
-    Update the ``requires-python`` line and the ``classifiers`` list.
+    Update the ``requires-python`` line, the ``classifiers`` list, and any dependency groups.
 :file:`docs/reference/versions-branches.rst`
     Update the compatibility information.
 :file:`docs/maintenance.rst`
